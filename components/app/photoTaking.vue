@@ -33,11 +33,10 @@ onMounted(async () => {
 </script>
 
 <template>
-    <p v-if="isLoading">Load</p>
     <div class="mb-4 w-full">
         <div class="flex flex-row justify-between">
             <TypoP>Take 3 pictures on diffrent angles.</TypoP>
-            <TypoMutted>{{ pictures.length }}/3</TypoMutted>
+            <TypoMuted>{{ pictures.length }}/3</TypoMuted>
         </div>
         <Progress v-model="progress" />
     </div>
@@ -75,8 +74,10 @@ onMounted(async () => {
         </div>
     </div>
 
-    <div class="mt-6 flex justify-center">
-        <Button>Identify</Button>
+    <div v-if="pictures.length === 3" class="mt-6 flex justify-center">
+        <NuxtLink to="/identify">
+            <Button>Identify</Button>
+        </NuxtLink>
     </div>
 </template>
 
