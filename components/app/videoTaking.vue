@@ -1,5 +1,14 @@
-<script setup></script>
+<script setup lang="ts">
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { AlertCircle } from 'lucide-vue-next'
+</script>
 
-<template>video</template>
-
-<style scoped></style>
+<template>
+    <Alert variant="destructive">
+        <AlertCircle class="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+            Your session has expired. Please log in again.
+        </AlertDescription>
+    </Alert>
+</template>
