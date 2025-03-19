@@ -26,6 +26,8 @@ const takePicture = async () => {
     pictures.value.push(base64)
 }
 
+const removePicture = (index) => pictures.value.splice(index, 1)
+
 onMounted(async () => {
     const devices = await camera.value?.devices()
     cameras.value = devices.filter((device) => device.kind === 'videoinput')
@@ -69,8 +71,21 @@ onMounted(async () => {
         </div>
     </BaseCamera>
     <div class="mt-6 flex flex-row gap-2">
-        <div v-for="picture in picturesDisplay" :key="picture" class="w-1/3">
+        <div
+            v-for="(picture, index) in picturesDisplay"
+            :key="picture"
+            class="relative w-1/3"
+        >
             <img :src="picture" />
+            <template v-if="picture">
+                <Button
+                    size="xs"
+                    variant="destructive"
+                    class="absolute right-1 top-1 z-10"
+                    @click="removePicture(index)"
+                    >X</Button
+                >
+            </template>
         </div>
     </div>
 
