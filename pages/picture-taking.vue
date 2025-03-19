@@ -3,15 +3,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const speed = ref(-Infinity)
 
-const isSpeedGood = computed(() => speed.value >= 5)
+const isSpeedGood = computed(() => speed.value >= 2)
 const isConnectionLost = computed(() => speed.value <= 0)
+const connectionNotSupported = computed(() => speed.value === -Infinity)
 
 const updateSpeed = () => {
     const connection =
         navigator.connection ||
         navigator.mozConnection ||
         navigator.webkitConnection
-    console.log(connection)
     if (connection) {
         speed.value = connection.downlink
     } else {
@@ -21,7 +21,7 @@ const updateSpeed = () => {
 
 onMounted(() => {
     updateSpeed()
-    navigator.connection.addEventListener('change', updateSpeed)
+    navigator?.connection?.addEventListener('change', updateSpeed)
 })
 </script>
 
@@ -30,45 +30,48 @@ onMounted(() => {
         class="flex h-screen w-screen flex-col items-center justify-center gap-12 px-5 py-10"
     >
         <div class="flex flex-col items-center justify-center gap-1">
-            <BaseH1>EQUiD</BaseH1>
-            <template v-if="isConnectionLost">
-                <BaseLead
-                    >We are unable to determine your internet speed, please
-                    check your connection</BaseLead
-                >
-            </template>
-            <template v-else>
-                <template v-if="isSpeedGood">
-                    <BaseLead class="text-center"
-                        >Based on your internet speed you can either use the
-                        video or image scanning method</BaseLead
-                    >
+            <TypoH1>EQUiD</TypoH1>
+            <TypoLead class="text-center">
+                <template v-if="connectionNotSupported">
+                    Based on your internet speed you can either use the video or
+                    image scanning method
+                </template>
+                <template v-else-if="isConnectionLost">
+                    We are unable to determine your internet speed, please check
+                    your connection
+                </template>
+                <template v-else-if="isSpeedGood">
+                    Based on your internet speed you can either use the video or
+                    image scanning method
                 </template>
                 <template v-else>
-                    <BaseLead
-                        >Based on your internet speed you can only use the image
-                        scaning</BaseLead
-                    >
+                    Based on your internet speed you can only use the image
+                    scanning
                 </template>
-            </template>
+            </TypoLead>
         </div>
         <section class="h-full w-full max-w-screen-sm bg-slate-400">
-            <Tabs v-if="!isConnectionLost" default-value="photo" class="w-full">
-                <TabsList>
-                    <TabsTrigger value="photo">Pictures</TabsTrigger>
-                    <TabsTrigger value="video">Video</TabsTrigger>
-                </TabsList>
-                <TabsContent value="photo">
-                    <AppPhotoTaking />
-                </TabsContent>
-                <TabsContent value="video">
-                    <AppVideoTaking />
-                </TabsContent>
-            </Tabs>
-            <template v-else>
-                <BaseMuted>
+            <template v-if="connectionNotSupported || isSpeedGood">
+                <Tabs default-value="photo" class="w-full">
+                    <TabsList>
+                        <TabsTrigger value="photo">Pictures</TabsTrigger>
+                        <TabsTrigger value="video">Video</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="photo">
+                        <AppPhotoTaking />
+                    </TabsContent>
+                    <TabsContent value="video">
+                        <AppVideoTaking />
+                    </TabsContent>
+                </Tabs>
+            </template>
+            <template v-else-if="isConnectionLost">
+                <TypoMuted>
                     Please check your connection and try again
-                </BaseMuted>
+                </TypoMuted>
+            </template>
+            <template v-else>
+                <AppPhotoTaking />
             </template>
         </section>
     </main>
