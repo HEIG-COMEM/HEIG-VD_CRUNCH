@@ -3,7 +3,7 @@
         <div
             class="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-12"
         >
-            <TypoH1>EQUiD</TypoH1>
+            <TypoH1 class="capitalize">HORSEiD</TypoH1>
             <NuxtLink
                 to="/picture-taking"
                 class="group rounded-full border border-black/5 bg-neutral-200/50 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"

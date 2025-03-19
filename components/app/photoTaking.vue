@@ -1,9 +1,18 @@
 <script setup>
+import { Progress } from '@/components/ui/progress'
+
 const facingMode = ref('environment')
 const camera = useTemplateRef('camera')
 const cameras = ref([])
 const pictures = ref([])
 const isLoading = ref(true)
+const progress = computed(() => (pictures.value.length / 3) * 100)
+
+const picturesDisplay = computed(() => {
+    if (pictures.value.length >= 3) return pictures.value
+
+    return pictures.value.concat(Array(3 - pictures.value.length).fill(null))
+})
 
 const takePicture = async () => {
     const blob = await camera.value.snapshot()
@@ -25,8 +34,15 @@ onMounted(async () => {
 
 <template>
     <p v-if="isLoading">Load</p>
-    <TypoP>Lorem</TypoP>
+    <div class="mb-4 w-full">
+        <div class="flex flex-row justify-between">
+            <TypoP>Take 3 pictures on diffrent angles.</TypoP>
+            <TypoMutted>{{ pictures.length }}/3</TypoMutted>
+        </div>
+        <Progress v-model="progress" />
+    </div>
     <BaseCamera
+        v-if="pictures.length < 3"
         ref="camera"
         :resolution="{ width: 1500, height: 2000 }"
         :facing-mode="cameras.length > 1 ? facingMode : 'environment'"
@@ -53,6 +69,15 @@ onMounted(async () => {
             </Button>
         </div>
     </BaseCamera>
+    <div class="mt-6 flex flex-row gap-2">
+        <div v-for="picture in picturesDisplay" :key="picture" class="w-1/3">
+            <img :src="picture" />
+        </div>
+    </div>
+
+    <div class="mt-6 flex justify-center">
+        <Button>Identify</Button>
+    </div>
 </template>
 
 <style scoped></style>

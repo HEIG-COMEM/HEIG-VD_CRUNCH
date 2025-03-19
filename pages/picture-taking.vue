@@ -30,7 +30,7 @@ onMounted(() => {
         class="flex h-screen w-screen flex-col items-center justify-center gap-12 px-5 py-10"
     >
         <div class="flex flex-col items-center justify-center gap-1">
-            <TypoH1>EQUiD</TypoH1>
+            <TypoH1>HORSEiD</TypoH1>
             <TypoLead class="text-center">
                 <template v-if="connectionNotSupported">
                     Based on your internet speed you can either use the video or
