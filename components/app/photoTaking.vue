@@ -1,17 +1,23 @@
 <script setup>
 import { Progress } from '@/components/ui/progress'
 
+const REQUIRED_PICTURES = 4
+
 const facingMode = ref('environment')
 const camera = useTemplateRef('camera')
 const cameras = ref([])
 const pictures = ref([])
 const isLoading = ref(true)
-const progress = computed(() => (pictures.value.length / 3) * 100)
+const progress = computed(
+    () => (pictures.value.length / REQUIRED_PICTURES) * 100
+)
 
 const picturesDisplay = computed(() => {
-    if (pictures.value.length >= 3) return pictures.value
+    if (pictures.value.length >= REQUIRED_PICTURES) return pictures.value
 
-    return pictures.value.concat(Array(3 - pictures.value.length).fill(null))
+    return pictures.value.concat(
+        Array(REQUIRED_PICTURES - pictures.value.length).fill(null)
+    )
 })
 
 const takePicture = async () => {
@@ -37,13 +43,16 @@ onMounted(async () => {
 <template>
     <div class="mb-4 w-full">
         <div class="flex flex-row justify-between">
-            <TypoP>Take 3 pictures on diffrent angles.</TypoP>
-            <TypoMuted>{{ pictures.length }}/3</TypoMuted>
+            <TypoP
+                >Take {{ REQUIRED_PICTURES }} pictures on different
+                angles.</TypoP
+            >
+            <TypoMuted>{{ pictures.length }}/{{ REQUIRED_PICTURES }}</TypoMuted>
         </div>
         <Progress v-model="progress" />
     </div>
     <BaseCamera
-        v-if="pictures.length < 3"
+        v-if="pictures.length < REQUIRED_PICTURES"
         ref="camera"
         :resolution="{ width: 1500, height: 2000 }"
         :facing-mode="cameras.length > 1 ? facingMode : 'environment'"
@@ -89,7 +98,10 @@ onMounted(async () => {
         </div>
     </div>
 
-    <div v-if="pictures.length === 3" class="mt-6 flex justify-center">
+    <div
+        v-if="pictures.length === REQUIRED_PICTURES"
+        class="mt-6 flex justify-center"
+    >
         <NuxtLink to="/identify">
             <Button>Identify</Button>
         </NuxtLink>
