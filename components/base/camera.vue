@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, defineProps, defineExpose } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const props = defineProps({
     resolution: {
