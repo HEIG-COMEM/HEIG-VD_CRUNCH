@@ -24,7 +24,7 @@ import { cn } from '~/utils/cn'
 
 withDefaults(
     defineProps<{
-        shimmerWidth: number
+        shimmerWidth?: number
     }>(),
     {
         shimmerWidth: 100,
