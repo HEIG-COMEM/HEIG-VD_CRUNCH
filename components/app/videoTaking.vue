@@ -6,9 +6,9 @@ import { AlertCircle } from 'lucide-vue-next'
 <template>
     <Alert variant="destructive">
         <AlertCircle class="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
+        <AlertTitle>Work in progress</AlertTitle>
         <AlertDescription>
-            Your session has expired. Please log in again.
+            This feature is not yet available. Please check back later.
         </AlertDescription>
     </Alert>
 </template>
