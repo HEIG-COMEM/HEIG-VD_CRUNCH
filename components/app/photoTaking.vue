@@ -3,7 +3,7 @@ const facingMode = ref('environment')
 const camera = useTemplateRef('camera')
 const cameras = ref([])
 const pictures = ref([])
-const isLoading = ref(false)
+const isLoading = ref(true)
 
 const takePicture = async () => {
     const blob = await camera.value.snapshot()
@@ -35,7 +35,10 @@ onMounted(async () => {
         @loading="isLoading = true"
         @started="isLoading = false"
     >
-        <div class="absolute bottom-5 left-1/2 -translate-x-1/2 transform">
+        <div
+            v-show="!isLoading"
+            class="absolute bottom-5 left-1/2 -translate-x-1/2 transform"
+        >
             <Button size="icon" @click="takePicture()">
                 <svg
                     width="60"
