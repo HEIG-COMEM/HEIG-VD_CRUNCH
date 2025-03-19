@@ -50,7 +50,7 @@ onMounted(() => {
                 </template>
             </TypoLead>
         </div>
-        <section class="h-full w-full max-w-screen-sm bg-slate-400">
+        <section class="h-full w-full max-w-screen-sm">
             <template v-if="connectionNotSupported || isSpeedGood">
                 <Tabs default-value="photo" class="w-full">
                     <TabsList>
