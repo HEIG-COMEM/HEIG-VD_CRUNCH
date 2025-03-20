@@ -1,5 +1,5 @@
 <script setup>
-const HORSE_NAME = 'Mustang'
+const HORSE_NAME = 'Petit tonnerre'
 const HORSE_OWNER = 'Hugo'
 </script>
 
@@ -9,7 +9,7 @@ const HORSE_OWNER = 'Hugo'
             <CardContent class="grid h-[80vh] p-0 md:grid-cols-2">
                 <div class="relative block min-h-48 bg-muted">
                     <img
-                        src="https://thumbs.dreamstime.com/b/horse-head-5971041.jpg"
+                        src="~/assets/Image.jpeg"
                         alt="Image"
                         class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
                     />
