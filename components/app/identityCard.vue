@@ -7,7 +7,7 @@ const HORSE_OWNER = 'Hugo'
     <div class="flex flex-col gap-6">
         <Card class="overflow-hidden">
             <CardContent class="grid h-[80vh] p-0 md:grid-cols-2">
-                <div class="relative block bg-muted">
+                <div class="relative block min-h-48 bg-muted">
                     <img
                         src="https://thumbs.dreamstime.com/b/horse-head-5971041.jpg"
                         alt="Image"

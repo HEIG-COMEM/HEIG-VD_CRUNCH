@@ -65,7 +65,7 @@ onMounted(async () => {
             v-show="!isLoading"
             class="absolute bottom-5 left-1/2 -translate-x-1/2 transform"
         >
-            <Button size="icon" @click="takePicture()">
+            <Button size="lg" @click="takePicture()">
                 <svg
                     width="60"
                     height="60"
