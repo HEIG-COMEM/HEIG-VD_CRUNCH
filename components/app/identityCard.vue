@@ -14,7 +14,7 @@ const HORSE_OWNER = 'Hugo'
                         class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
                     />
                 </div>
-                <form class="p-6 md:p-8">
+                <form class="overflow-y-scroll p-6 md:p-8">
                     <div class="flex flex-col gap-6">
                         <div class="flex flex-col items-center text-center">
                             <h1 class="text-2xl font-bold">{{ HORSE_NAME }}</h1>
